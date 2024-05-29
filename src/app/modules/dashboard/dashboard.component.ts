@@ -62,7 +62,7 @@ export class DashboardComponent implements OnInit {
       next: (response) => {
         const studios = response.studios;
 
-        studios.sort((a: any, b: any) =>
+        studios.sort((a, b) =>
           a.winCount > b.winCount ? -1 : b.winCount > a.winCount ? 1 : 0,
         );
 
@@ -76,15 +76,6 @@ export class DashboardComponent implements OnInit {
     this._movieService.getIntervalForProducers().subscribe({
       next: (response) => {
         this.producersInterval = response;
-      },
-      error: (error) => {
-        console.log('error:', error);
-      },
-    });
-
-    this._movieService.getMoviesPerYear(true, '1999').subscribe({
-      next: (response) => {
-        this.listMoviesWinnerByYear = response;
       },
       error: (error) => {
         console.log('error:', error);

@@ -1,10 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, ViewChild } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
-import { MatTableModule } from '@angular/material/table';
-import { MatCardModule } from '@angular/material/card';
+import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 
 import { MovieService } from '../../core/services/movie';
 
@@ -17,24 +17,38 @@ import { TMovie } from '../../share/models';
     FormsModule,
     ReactiveFormsModule,
     MatTableModule,
-    MatCardModule,
     MatFormFieldModule,
     MatInputModule,
+    MatPaginatorModule,
   ],
   templateUrl: './movies.component.html',
   styleUrl: './movies.component.scss',
 })
-export class MoviesComponent implements OnInit {
-  listMovies: TMovie[] = [];
+export class MoviesComponent implements AfterViewInit {
+  listMovies = new MatTableDataSource<TMovie>([]);
+  listMovies2: TMovie[] = [];
 
-  columnsListYearsMultWinners: string[] = ['year', 'winnerCount'];
+  filterYear: number | undefined;
+
+  columnsListMovies: string[] = ['id', 'year', 'title'];
+
+  @ViewChild(MatPaginator)
+  paginator!: MatPaginator;
 
   constructor(private _movieService: MovieService) {}
 
-  ngOnInit(): void {
-    this._movieService.getMovieYearsWithMultWinners().subscribe({
+  ngAfterViewInit() {
+    this.listMovies.paginator = this.paginator;
+  }
+
+  onChangeYear(event: any): void {
+    const year = event.target.value || '';
+
+    this._movieService.getMoviesPerYear(false, year).subscribe({
       next: (response) => {
-        this.listMovies = response.years;
+        this.listMovies2 = response;
+        this.listMovies = new MatTableDataSource<TMovie>(response);
+        this.listMovies.paginator = this.paginator;
       },
       error: (error) => {
         console.log('error:', error);
