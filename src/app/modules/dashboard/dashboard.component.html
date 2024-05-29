@@ -1,5 +1,6 @@
 <div class="container">
   <div class="content">
+    <!-- Table showing the years that had more than one winner -->
     <div class="content-item">
       <mat-card>
         <mat-card-content>
@@ -37,6 +38,7 @@
       </mat-card>
     </div>
 
+    <!-- Table showing the top 3 winning studios -->
     <div class="content-item">
       <mat-card>
         <mat-card-content>
@@ -66,11 +68,13 @@
       </mat-card>
     </div>
 
+    <!-- Table showing producers with longest and shortest interval between wins -->
     <div class="content-item">
       <mat-card>
         <mat-card-content>
           <h2>Producers with longest and shortest interval between wins</h2>
 
+          <!-- Table Maximum wins -->
           <h3>Maximum</h3>
           <table
             mat-table
@@ -112,6 +116,7 @@
             ></tr>
           </table>
 
+          <!-- Table Minimum wins -->
           <h3 style="margin-top: 20px">Minimum</h3>
           <table
             mat-table
@@ -156,6 +161,7 @@
       </mat-card>
     </div>
 
+    <!-- Table showing list of movies winners by year -->
     <div class="content-item">
       <mat-card>
         <mat-card-content>
@@ -164,6 +170,7 @@
           <mat-form-field>
             <mat-label>Search by year</mat-label>
             <input
+              id="filter-year"
               matInput
               placeholder="Year"
               [(ngModel)]="filterYear"

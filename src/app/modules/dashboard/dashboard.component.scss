@@ -1,5 +1,5 @@
 .container {
-  width: 100vw;
+  width: 100%;
   max-width: 1520px;
 }
 
@@ -21,4 +21,10 @@
 
 .mat-mdc-form-field {
   width: 100%;
+}
+
+@media (max-width: 910px) {
+  .content {
+    flex-direction: column;
+  }
 }

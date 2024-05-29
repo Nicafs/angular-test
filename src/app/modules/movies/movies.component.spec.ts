@@ -1,25 +1,37 @@
 import {
   ComponentFixture,
   TestBed,
+  async,
   inject,
   waitForAsync,
 } from '@angular/core/testing';
+import { MovieService } from '@app/core/services/movie/movie.service';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
+import { ToastrService, ToastrModule, provideToastr } from 'ngx-toastr';
+
 import { MoviesComponent } from './movies.component';
-import { MovieService } from '@app/core/services/movie/movie.service';
+import { By } from '@angular/platform-browser';
 
 describe('MoviesComponent', () => {
   let component: MoviesComponent;
   let fixture: ComponentFixture<MoviesComponent>;
   let service: MovieService;
+  let toast: ToastrService;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [MoviesComponent, HttpClientModule, BrowserAnimationsModule],
+      imports: [
+        MoviesComponent,
+        HttpClientModule,
+        BrowserAnimationsModule,
+        ToastrModule,
+      ],
+      providers: [provideToastr()],
     }).compileComponents();
 
+    toast = TestBed.inject(ToastrService);
     service = TestBed.inject(MovieService);
     fixture = TestBed.createComponent(MoviesComponent);
     component = fixture.componentInstance;
@@ -79,4 +91,25 @@ describe('MoviesComponent', () => {
       ),
     );
   });
+
+  it('should trigger onChangeYear', async(() => {
+    const componentSpy = spyOn(component, 'onChangeYear');
+    const serviceSpy = spyOn(service, 'getMoviesPerYear');
+
+    fixture.detectChanges();
+    fixture.whenStable().then(() => {
+      let field: HTMLInputElement = fixture.debugElement.query(
+        By.css('#filter-year'),
+      ).nativeElement;
+
+      expect(field.value).toBe('');
+
+      field.value = '2000';
+      field.dispatchEvent(new Event('input'));
+
+      fixture.detectChanges();
+
+      expect(component.filterYear).toBe('2000');
+    });
+  }));
 });

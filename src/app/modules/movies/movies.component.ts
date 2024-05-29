@@ -6,9 +6,10 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 
-import { MovieService } from '../../core/services/movie';
+import { ToastrService } from 'ngx-toastr';
 
-import { TMovie } from '../../share/models';
+import { MovieService } from '@services/movie';
+import { TMovie } from '@models';
 
 @Component({
   selector: 'app-movies',
@@ -28,14 +29,17 @@ export class MoviesComponent implements AfterViewInit {
   listMovies = new MatTableDataSource<TMovie>([]);
   listMovies2: TMovie[] = [];
 
-  filterYear: number | undefined;
+  filterYear: string | undefined;
 
   columnsListMovies: string[] = ['id', 'year', 'title'];
 
   @ViewChild(MatPaginator)
   paginator!: MatPaginator;
 
-  constructor(private _movieService: MovieService) {}
+  constructor(
+    private _movieService: MovieService,
+    private toastr: ToastrService,
+  ) {}
 
   ngAfterViewInit() {
     this.listMovies.paginator = this.paginator;
@@ -51,7 +55,7 @@ export class MoviesComponent implements AfterViewInit {
         this.listMovies.paginator = this.paginator;
       },
       error: (error) => {
-        console.log('error:', error);
+        this.toastr.error('Error!', error.message);
       },
     });
   }

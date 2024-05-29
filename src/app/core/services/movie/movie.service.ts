@@ -4,7 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable, map } from 'rxjs';
 
 import { environment } from '@env/environment';
-import { TIntervalProcucer, TMovie, TStudio, TYearWinner } from '@app/share';
+import { TIntervalProcucer, TMovie, TStudio, TYearWinner } from '@models';
 
 @Injectable({
   providedIn: 'root',

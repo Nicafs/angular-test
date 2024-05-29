@@ -15,6 +15,7 @@
         <mat-form-field>
           <mat-label>Filter by year</mat-label>
           <input
+            id="filter-year"
             matInput
             placeholder="Year"
             [(ngModel)]="filterYear"
@@ -35,7 +36,6 @@
       <td mat-cell *matCellDef="let element">
         {{ element.title }}
       </td>
-      \\\\\\\\\\\\
     </ng-container>
 
     <tr mat-header-row *matHeaderRowDef="columnsListMovies"></tr>
