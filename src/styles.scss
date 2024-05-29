@@ -2,3 +2,16 @@
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.menu-active .mdc-list-item__primary-text {
+  color: blue !important;
+}
+
+.mat-toolbar {
+  background-color: #343942 !important;
+  color: white !important;
+}
+
+.menu-drawer {
+  width: 500px;
+}

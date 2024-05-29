@@ -17,34 +17,32 @@ export class MovieService {
     winner = true,
     year: string,
   ): Observable<any> {
-    return this._http
-      .get<any>(
-        `${environment.api}/movies?page=${page}&size=${size}&winner=${winner}&year=${year}`,
-      )
-      .pipe(map((result) => result.content));
+    return this._http.get<any>(
+      `${environment.api}/movies?page=${page}&size=${size}&winner=${winner}&year=${year}`,
+    );
   }
 
-  getMovieYearsWithMultWinners(years: string): Observable<any> {
-    return this._http
-      .get<any>(`${environment.api}/movies?projection=${years}`)
-      .pipe(map((result) => result.content));
+  getMovieYearsWithMultWinners(): Observable<any> {
+    return this._http.get<any>(
+      `${environment.api}/movies?projection=years-with-multiple-winners`,
+    );
   }
 
-  getStudios(studios: string): Observable<any> {
-    return this._http
-      .get<any>(`${environment.api}/movies?projection=${studios}`)
-      .pipe(map((result) => result.content));
+  getStudios(): Observable<any> {
+    return this._http.get<any>(
+      `${environment.api}/movies?projection=studios-with-win-count`,
+    );
   }
 
-  getIntervalForProducers(interval: string): Observable<any> {
-    return this._http
-      .get<any>(`${environment.api}/movies?projection=${interval}`)
-      .pipe(map((result) => result.content));
+  getIntervalForProducers(): Observable<any> {
+    return this._http.get<any>(
+      `${environment.api}/movies?projection=max-min-win-interval-for-producers`,
+    );
   }
 
   getMoviesPerYear(winner: boolean, year: string): Observable<any> {
-    return this._http
-      .get<any>(`${environment.api}/movies?winner=${winner}&year=${year}`)
-      .pipe(map((result) => result.content));
+    return this._http.get<any>(
+      `${environment.api}/movies?winner=${winner}&year=${year}`,
+    );
   }
 }

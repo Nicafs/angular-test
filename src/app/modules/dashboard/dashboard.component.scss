@@ -1,0 +1,24 @@
+.container {
+  width: 100vw;
+  max-width: 1520px;
+}
+
+.content {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+  justify-content: stretch;
+  align-items: stretch;
+}
+
+.content-item {
+  flex: 1 1 calc(50% - 20px);
+}
+
+.mdc-card {
+  height: 100%;
+}
+
+.mat-mdc-form-field {
+  width: 100%;
+}
