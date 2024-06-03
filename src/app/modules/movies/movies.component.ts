@@ -9,6 +9,7 @@ import { MatPaginatorModule, PageEvent } from '@angular/material/paginator';
 
 import { ToastrService } from 'ngx-toastr';
 
+import { BooleanPipe } from '@pipe';
 import { MovieService } from '@services/movie';
 import { TMovie } from '@models';
 
@@ -23,6 +24,7 @@ import { TMovie } from '@models';
     MatInputModule,
     MatPaginatorModule,
     MatSelectModule,
+    BooleanPipe,
   ],
   templateUrl: './movies.component.html',
   styleUrl: './movies.component.scss',

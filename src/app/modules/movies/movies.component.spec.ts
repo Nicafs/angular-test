@@ -86,16 +86,13 @@ describe('MoviesComponent', () => {
     waitForAsync(
       inject([MovieService], (service: any) =>
         service
-          .getMoviesPerYear(false, 2000)
+          .getMovieData(0, 10, undefined, undefined)
           .subscribe((result: any) => expect(result).toBe(fakedFetchedList)),
       ),
     );
   });
 
   it('should trigger onChangeYear', async(() => {
-    const componentSpy = spyOn(component, 'onChangeYear');
-    const serviceSpy = spyOn(service, 'getMoviesPerYear');
-
     fixture.detectChanges();
     fixture.whenStable().then(() => {
       let field: HTMLInputElement = fixture.debugElement.query(
@@ -110,6 +107,27 @@ describe('MoviesComponent', () => {
       fixture.detectChanges();
 
       expect(component.filterYear).toBe('2000');
+    });
+  }));
+
+  it('should trigger onChangeYear', async(() => {
+    const componentSpy = spyOn(component, 'onChangeWinner');
+    const serviceSpy = spyOn(service, 'getMovieData');
+
+    fixture.detectChanges();
+    fixture.whenStable().then(() => {
+      let field: HTMLSelectElement = fixture.debugElement.query(
+        By.css('#filter-winner'),
+      ).nativeElement;
+
+      expect(field.value).toBe('0');
+
+      field.value = '1';
+      field.dispatchEvent(new Event('input'));
+
+      fixture.detectChanges();
+
+      expect(component.filterWinner).toBe(1);
     });
   }));
 });
