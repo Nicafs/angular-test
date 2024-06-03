@@ -14,12 +14,12 @@ export class MovieService {
 
   getMovieData(
     page = 0,
-    size = 8,
-    winner = true,
-    year: string,
+    size = 10,
+    winner: boolean | undefined,
+    year: string | undefined,
   ): Observable<any> {
     return this._http.get<any>(
-      `${environment.api}/movies?page=${page}&size=${size}&winner=${winner}&year=${year}`,
+      `${environment.api}/movies?page=${page}&size=${size}${winner !== undefined ? `&winner=${winner}` : ''}${year !== undefined ? `&year=${year}` : ''}`,
     );
   }
 

@@ -34,14 +34,14 @@ export class DashboardComponent implements OnInit {
   filterYear: string | undefined;
 
   columnsListYearsMultWinners: string[] = ['year', 'winnerCount'];
-  columnsTop3StudiosWinners: string[] = ['name'];
+  columnsTop3StudiosWinners: string[] = ['name', 'winCount'];
   columnsProducersInterval: string[] = [
     'producer',
     'interval',
     'previousWin',
     'followingWin',
   ];
-  columnsListMoviesWinnerByYear: string[] = ['id', 'year'];
+  columnsListMoviesWinnerByYear: string[] = ['id', 'title', 'year'];
 
   constructor(
     private _movieService: MovieService,
